@@ -10,6 +10,11 @@
   */
   
   // CODE
+      
+
+      bool comp(vector<int> v1, vector<int> v2){
+          return v1[0] < v2[0];
+      }
   
       vector<vector<int>> merge(vector<vector<int>>& intervals) {
         int n = intervals.size();
