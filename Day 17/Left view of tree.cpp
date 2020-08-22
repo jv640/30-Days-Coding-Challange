@@ -88,3 +88,6 @@ void leftView(struct node* root)
   
     leftViewUtil(root, q); 
 } 
+
+
+// Other approach is to keep two parameter horizontal dist and vertical distance associated with nodes store value for each VD and give priority to less HD
