@@ -78,3 +78,4 @@
         }
         return dpa[m][n];
     }
+// space complexity can be reduces by taking only 2 rows
