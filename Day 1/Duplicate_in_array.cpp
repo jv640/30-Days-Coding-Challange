@@ -24,5 +24,5 @@ Constraints:
               return nums[i];
       return -1;
   }
-  
-  Also revise the turtle and hare finding cycle approach this can be applied here also 
+// Sorting doesnt meet the not modifying constraint so we will use below given approach it will satisfy all constraints
+//  Also revise the turtle and hare finding cycle approach this can be applied here also 
