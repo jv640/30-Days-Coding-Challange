@@ -2,7 +2,7 @@
   Description : Find element that occur only once and rest occur twice.
   
 */
-
+// below approach is used when array is sorted but there is one approach which can be used on any type of array XOR take XOR of all elem final value in XOR is answer
 // Code
   #include<bits/stdc++.h>
 using namespace std;
