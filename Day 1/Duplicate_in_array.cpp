@@ -24,5 +24,25 @@ Constraints:
               return nums[i];
       return -1;
   }
+
+
 // Sorting doesnt meet the not modifying constraint so we will use below given approach it will satisfy all constraints
 //  Also revise the turtle and hare finding cycle approach this can be applied here also 
+
+// As the duplicate is guaranteed, think of it like a circular linked list now we need to find loop (slow fast pointer approach)
+
+  int findDuplicate(vector<int>& nums) {
+      int fast = 0, slow = 0;
+      do{
+          fast = nums[nums[fast]];
+          slow = nums[slow];
+      }while(nums[fast] != nums[slow]);
+
+      fast = 0;
+      while(nums[fast] != nums[slow]){
+          fast = nums[fast];
+          slow = nums[slow];
+      }
+      return nums[fast];
+
+  }
