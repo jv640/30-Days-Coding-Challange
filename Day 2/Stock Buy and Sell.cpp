@@ -40,3 +40,18 @@
         }
         return bigger;
     }
+
+/*
+  We know max profit will only be generated using min value to left, so we keep track of profit using lowest value encountered till now.
+  and update profit and lowest value if we find any new.
+*/
+    int maxProfit(vector<int>& prices) {
+        int minn = INT_MAX, maxprofit = 0;
+        for(int i = 0; i<prices.size(); i++){
+            if(prices[i] < minn)
+                minn = prices[i];
+            else if(prices[i]-minn > maxprofit)
+                maxprofit = prices[i]-minn;
+        }
+        return maxprofit;
+    }
