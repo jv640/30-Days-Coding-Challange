@@ -1,60 +1,41 @@
 class Solution {
-private:
-vector<string> generateQueens(vector<int>& columnPlacements,int n)
-{
-    vector<string> temp;
-    int total=columnPlacements.size();
-    for(int i=0;i<total;i++)
-    {
-        string s="";
-        for(int col=0;col<n;col++)
-        {
-            if(col==columnPlacements[i])
-                s.append("Q");
-            else 
-                s.append(".");
-        }
-        temp.push_back(s);
-    }
-    return temp;
-}
-bool isSafe(vector<int>& columnPlacements)
-{
-    int lastPlacedQueenColumn=columnPlacements.size()-1;
-    for(int i=0;i<lastPlacedQueenColumn;i++)
-    {
-        int absoluteColDistance=abs(columnPlacements[i]-columnPlacements[lastPlacedQueenColumn]);
-        int absoluteRowDistance=lastPlacedQueenColumn-i;
-        if(absoluteColDistance==0 or absoluteColDistance==absoluteRowDistance)
-            return false;
-    }
-    return true;
-}
-void solveNQueensHelper(int n,int row,vector<vector<string>> &board,vector<int> &columnPlacements)
-{
-    if(row==n)
-    {
-        board.push_back(generateQueens(columnPlacements,n));
-        return;
-    }
-    for(int col=0;col<n;col++)
-    {
-        columnPlacements.push_back(col);
-        if(isSafe(columnPlacements))
-        {
-            solveNQueensHelper(n,row+1,board,columnPlacements);
-        }
-        //backtrack
-        columnPlacements.pop_back();
-    }
-}
 public:
+    vector<vector<string>> ret;
+    bool is_valid(vector<string> &board, int row, int col){
+        // check col
+        for(int i=row;i>=0;--i)
+            if(board[i][col] == 'Q') return false;
+        // check left diagonal
+        for(int i=row,j=col;i>=0&&j>=0;--i,--j)
+            if(board[i][j] == 'Q') return false;
+        //check right diagonal
+        for(int i=row,j=col;i>=0&&j<board.size();--i,++j)
+            if(board[i][j] == 'Q') return false;
+        return true;
+    }
+    void dfs(vector<string> &board, int row){
+        // exit condition
+        if(row == board.size()){
+            ret.push_back(board);
+            return;
+        }
+        // iterate every possible position
+        for(int i=0;i<board.size();++i){
+            if(is_valid(board,row,i)){
+                // make decision
+                board[row][i] = 'Q';
+                // next iteration
+                dfs(board,row+1);
+                // back-tracking
+                board[row][i] = '.';
+            }
+        }
+    }
     vector<vector<string>> solveNQueens(int n) {
-        vector<vector<string>> board;
-        if(n==2 or n==3)
-            return {};
-        vector<int> columnPlacements;
-        solveNQueensHelper(n,0,board,columnPlacements);
-        return board;
+		// return empty if n <= 0
+        if(n <= 0) return {{}};
+        vector<string> board(n,string(n,'.'));
+        dfs(board,0);
+        return ret;
     }
 };
